@@ -1,0 +1,35 @@
+{
+  "name": "crud-clubes",
+  "version": "1.0.0",
+  "description": "Aplicacion CRUD de clubes de futbol de la liga inglesa",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Awus66/crud-clubes.git"
+  },
+  "author": "Agustin Conde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Awus66/crud-clubes/issues"
+  },
+  "homepage": "https://github.com/Awus66/crud-clubes#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "eslint": "^9.10.0",
+    "express": "^4.21.0",
+    "handlebars": "^4.7.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "nodemon": "^3.1.5",
+    "jest": "^29.7.0"
+  }
+}
