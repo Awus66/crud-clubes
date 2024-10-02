@@ -1,4 +1,4 @@
-<h1 class="text-center">Club List</h1>
+<h1 class="text-center p-3">Premier League</h1>
 <div class="container justify-content-center pb-3 mb-3 text-center">
     <table class="clubs-table table-hover table-striped">
         <thead>
@@ -8,6 +8,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">TLA</th>
                 <th scope="col">Stadium</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -18,6 +19,16 @@
                     <td>{{name}}</td>
                     <td>{{tla}}</td>
                     <td>{{venue}}</td>
+                    <td>
+                        <a href="/clubs/{{id}}" class="btn btn-outline-light btn-sm">Show</a>
+                        <form action="/clubs/{{id}}/edit" method="get" style="display:inline;">
+                            <button type="submit" class="btn btn-outline-light btn-sm">Edit</button>
+                        </form>
+                        <form action="/clubs/{{id}}/delete" method="post" style="display:inline;">
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             {{/each}}
         </tbody>
