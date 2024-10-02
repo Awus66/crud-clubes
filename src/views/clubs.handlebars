@@ -1,0 +1,25 @@
+<h1 class="text-center">Club List</h1>
+<div class="container justify-content-center pb-3 mb-3 text-center">
+    <table class="clubs-table table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Logo</th>
+                <th scope="col">Name</th>
+                <th scope="col">TLA</th>
+                <th scope="col">Stadium</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {{#each clubs}}
+                <tr class="row-lg-auto mt-3 align-middle">
+                    <th scope="row">{{id}}</th>
+                    <td><img src="{{crestUrl}}" class="img-fluid" alt="{{name}} Logo" style="width: 37px; height:auto;"/></td>
+                    <td>{{name}}</td>
+                    <td>{{tla}}</td>
+                    <td>{{venue}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
