@@ -1,0 +1,63 @@
+body {
+    background-image: url('images/football-stadium-3d-rendering.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+
+.clubs-table {
+    background-color: #7ee27e;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.clubs-table thead th {
+    background-color: green;
+    color: white;
+}
+
+.clubs-table tbody tr:nth-child(odd) {
+    background-color: #4CAF50;
+}
+
+.clubs-table tbody tr:nth-child(even) {
+    background-color: #93d294;
+}
+
+
+.clubs-table tbody tr:hover {
+    background-color: #7c8e85;
+}
+
+.clubs-table tbody td {
+    padding: 1%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.clubs-table tbody td img {
+    width: auto;
+    object-fit: contain;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+}
+
+header a {
+    color: white;
+}
+
+header img {
+    filter: brightness(0) invert(1); 
+}
+
+header .fs-4 {
+    color: white;
+}
