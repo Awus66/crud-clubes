@@ -24,13 +24,12 @@
                         <form action="/clubs/{{id}}/edit" method="get" style="display:inline;">
                             <button type="submit" class="btn btn-outline-light btn-sm">Edit</button>
                         </form>
-                        <form action="/clubs/{{id}}/delete" method="post" style="display:inline;">
-                            <input type="hidden" name="_method" value="delete">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-                        </form>
+                        <button class="btn btn-outline-danger btn-sm delete-club-btn" club-id="{{id}}">Delete</button>
                     </td>
                 </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
+
+<script src="/js/main.js"></script>
