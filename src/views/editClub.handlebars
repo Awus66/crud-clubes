@@ -1,16 +1,16 @@
 <div class="container justify-content-center pb-3 mb-3 text-center">
-    <form action="/clubs/:id/edit" id="edit-form" method="post" enctype="multipart/form-data">
+    <form action="/clubs/{{club.id}}/edit" id="edit-form" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="name" class="form-label tag">Club Name</label>
-            <input type="text" id="name" name="name" class="form-control" maxlength="60" required>
+            <input type="text" id="name" name="name" class="form-control" maxlength="60" value="{{club.name}}" required>
         </div>
         <div class="mb-3">
             <label for="tla" class="form-label tag">TLA</label>
-            <input type="text" class="form-control" id="tla" name="tla" maxlength="3" pattern="[A-Za-z]{3}" required>
+            <input type="text" class="form-control" id="tla" name="tla" maxlength="3" pattern="[A-Za-z]{3}" value="{{club.tla}}" required>
         </div>
         <div class="mb-3">
             <label for="venue" class="form-label tag">Stadium</label>
-            <input type="text" class="form-control" id="venue" name="venue" maxlength="60" required>
+            <input type="text" class="form-control" id="venue" name="venue" maxlength="60" value="{{club.venue}}" required>
         </div>
         <div class="mb-3">
             <label for="logo" class="form-label tag">Team Logo</label>

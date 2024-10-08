@@ -4,30 +4,34 @@ const multer = require('multer');
 const path = require('node:path');
 const clubsService = require('../utilities/clubsService.js');
 
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, path.join(__dirname, '../../static/uploads/')); 
+    cb(null, path.join(__dirname, '../../static/uploads'));
   },
   filename: (req, file, cb) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      cb(null, uniqueSuffix + '-' + file.originalname);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + '-' + file.originalname);
   }
 });
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image/')) {
-      cb(null, true); 
+    cb(null, true);
   } else {
-      cb(new Error('Only image files are allowed!'), false);
+    cb(new Error('Only image files are allowed!'), false);
   }
 };
 
 const upload = multer({ 
-  dest: '../../static/uploads/',
-  fileFilter: fileFilter,
   limits: { fileSize: 5 * 1024 * 1024 }
+  storage: storage, 
+  fileFilter: fileFilter, 
+  limits: limits 
 });
+
+
+
+
 
 router.get('/clubs', async (req, res) => {
   try {
@@ -95,7 +99,7 @@ router.get('/clubs/:id/edit', async (req, res) => {
   }
 });
 
-router.post('/clubs/:id/edit', async (req, res) => {
+router.post('/clubs/:id/edit', upload.single('logo'), async (req, res) => {
   const { name, tla, venue } = req.body;
   try {
     if (name.length > 60) {
@@ -107,23 +111,31 @@ router.post('/clubs/:id/edit', async (req, res) => {
       return res.status(400).send('TLA must be exactly 3 alphabetical characters');
     }
 
-
     if (venue.length > 60) {
       return res.status(400).send('Stadium name cannot exceed 60 characters');
     }
 
+    let crestUrl;
+    if (req.file) {
+      crestUrl = `/uploads/${req.file.filename}`;
+    } else {
+      crestUrl = req.body.currentLogo;
+    }
+
     const newInfo = {
-        id: req.params.id,
-        name: req.body.name,
-        tla: req.body.tla,
-        venue: req.body.venue,
-        crestUrl: `/uploads/${req.file.filename}`
+      id: parseInt(req.params.id),
+      name: name,
+      tla: tla,
+      venue: venue,
+      crestUrl: crestUrl
     };
+
     await clubsService.editClub(newInfo);
     res.redirect('/clubs');
-} catch (error) {
+  } catch (error) {
+    console.error('Error editing club:', error);
     res.status(500).send(`Error editing ${name} club.`);
-}
+  }
 });
 
 router.get('/clubs/:id', async (req, res) => {
