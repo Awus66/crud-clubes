@@ -55,10 +55,14 @@ router.get('/clubs/create', async (req, res) => {
 });
 
 router.post('/clubs/create', upload.single('logo'), async (req, res) => {
-  const { name, tla, venue } = req.body;
+  let { name, shortName, tla, venue, address, website, email, founded } = req.body;
   try {
       if (name.length > 60) {
         return res.status(400).send('Club name cannot exceed 60 characters');
+      }
+
+      if (shortName.length > name.length) {
+        return res.status(400).send('Club short name cannot be longer than the name');
       }
   
       const tlaRegex = /^[A-Za-z]{3}$/;
@@ -71,11 +75,46 @@ router.post('/clubs/create', upload.single('logo'), async (req, res) => {
         return res.status(400).send('Stadium name cannot exceed 60 characters');
       }
 
+      if (address.length > 200) {
+        return res.status(400).send('Address cannot exceed 60 characters');
+      }
+
+      if (website.length > 60) {
+        return res.status(400).send('Website cannot exceed 60 characters');
+      }
+
+      if (email.length > 60) {
+        return res.status(400).send('Email cannot exceed 60 characters');
+      }
+
+      if (founded.length > 4) {
+        return res.status(400).send('Founded year is invalid');
+      }
+
+      if(!website) {
+        website = "N/A";
+      }
+
+      if(!founded) {
+        founded = "N/A";
+      }
+
+      let crestUrl;
+      if (req.file) {
+        crestUrl = `/uploads/${req.file.filename}`;
+      } else {
+        crestUrl = `/uploads/defaultLogo.png`;
+      }
+
       const newClub = {
-          name: req.body.name,
-          tla: req.body.tla,
-          venue: req.body.venue,
-          crestUrl: `/uploads/${req.file.filename}`
+          name,
+          tla,
+          venue,
+          address,
+          website,
+          email,
+          founded,
+          crestUrl
       };
       await clubsService.addClub(newClub);
       res.redirect('/clubs');
@@ -99,10 +138,14 @@ router.get('/clubs/:id/edit', async (req, res) => {
 });
 
 router.post('/clubs/:id/edit', upload.single('logo'), async (req, res) => {
-  const { name, tla, venue } = req.body;
+  let { name, shortName, tla, venue, address, website, email, founded } = req.body;
   try {
     if (name.length > 60) {
       return res.status(400).send('Club name cannot exceed 60 characters');
+    }
+
+    if (shortName.length > name.length) {
+      return res.status(400).send('Club short name cannot be longer than the name');
     }
 
     const tlaRegex = /^[A-Za-z]{3}$/;
@@ -110,8 +153,25 @@ router.post('/clubs/:id/edit', upload.single('logo'), async (req, res) => {
       return res.status(400).send('TLA must be exactly 3 alphabetical characters');
     }
 
+
     if (venue.length > 60) {
       return res.status(400).send('Stadium name cannot exceed 60 characters');
+    }
+
+    if (address.length > 200) {
+      return res.status(400).send('Address cannot exceed 60 characters');
+    }
+
+    if (website.length > 60) {
+      return res.status(400).send('Website cannot exceed 60 characters');
+    }
+
+    if (email.length > 60) {
+      return res.status(400).send('Email cannot exceed 60 characters');
+    }
+
+    if (founded.length > 4) {
+      return res.status(400).send('Founded year is invalid');
     }
 
     let crestUrl;
@@ -123,10 +183,15 @@ router.post('/clubs/:id/edit', upload.single('logo'), async (req, res) => {
 
     const newInfo = {
       id: parseInt(req.params.id),
-      name: name,
-      tla: tla,
-      venue: venue,
-      crestUrl: crestUrl
+      name,
+      shortName,
+      tla,
+      crestUrl,
+      address,
+      website,
+      email,
+      founded,
+      venue
     };
 
     await clubsService.editClub(newInfo);
