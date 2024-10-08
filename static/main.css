@@ -9,6 +9,13 @@ body {
     padding: 0;
 }
 
+.tag {
+    background-color: green;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    
+}
+
 
 .clubs-table {
     background-color: #7ee27e;
