@@ -1,5 +1,6 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const uploadDirectory = path.join(__dirname, '../../static/uploads');
 
 async function loadClubs() {
   try {
@@ -42,6 +43,16 @@ async function removeClub(club) {
     if (index === -1) {
         throw new Error('Club not found');
     }
+
+    const logoPath = path.join(uploadDirectory, path.basename(clubs[index].crestUrl));
+
+    try {
+        await fs.unlink(logoPath);
+        console.log(`Logo file ${logoPath} deleted successfully`);
+    } catch (err) {
+        console.error(`Error deleting logo file: ${err.message}`);
+    }
+
     clubs.splice(index, 1);
     await saveClubs(clubs);
 }

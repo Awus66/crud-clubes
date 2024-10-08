@@ -13,8 +13,14 @@
             <input type="text" class="form-control" id="venue" name="venue" maxlength="60" value="{{club.venue}}" required>
         </div>
         <div class="mb-3">
-            <label for="logo" class="form-label tag">Team Logo</label>
-            <input type="file" class="form-control" id="logo" name="logo" accept="image/*" required>
+            <label for="logo" class="form-label tag">Current Logo</label>
+            
+            <div class="mb-3">
+                <img src="{{club.crestUrl}}" alt="Current Logo" style="max-width: 150px; max-height: 150px;">
+            </div>
+            <label for="logo" class="form-label tag">New Logo</label>
+            <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
+            <input type="hidden" name="currentLogo" value="{{club.crestUrl}}">
         </div>
         <button type="submit" class="btn btn-success">Save Club</button>
     </form>
