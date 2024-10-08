@@ -11,9 +11,18 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, uniqueSuffix + '-' + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
       cb(null, true); 
   } else {
       cb(new Error('Only image files are allowed!'), false);
+  }
+};
+
 const upload = multer({ 
   dest: '../../static/uploads/',
   fileFilter: fileFilter,
@@ -23,6 +32,8 @@ const upload = multer({
 router.get('/clubs', async (req, res) => {
   try {
     const clubs = await clubsService.loadClubs();
+    const clubCount = clubs.length;
+    res.render('clubs', { clubs, clubCount, title: 'Home' });
   } catch (error) {
     res.status(500).send('Error rendering data.');
   }
@@ -32,7 +43,7 @@ router.get('/', async (req, res) => {
   res.redirect('/clubs');
 });
 
-router.get('/clubs/:id', async (req, res) => {
+router.get('/clubs/create', async (req, res) => {
   try {
     res.render('createClub', { title: 'Create Club' });
   } catch (error) {
