@@ -47,6 +47,21 @@ async function removeClub(club) {
 }
 
 
+async function editClub(newInfo) {
+  const clubs = await loadClubs();
+  const index = clubs.findIndex(c => c.id === newInfo.id);
+
+  if (index === -1) {
+      throw new Error('Club not found');
+  }
+  clubs[index].name = newInfo.name;
+  clubs[index].tla = newInfo.tla;
+  clubs[index].venue = newInfo.venue;
+  clubs[index].crestUrl = newInfo.crestUrl;
+  await saveClubs(clubs);
+}
+
+
 async function getClubInfo(club) {
   try {
       const filePath = path.join(__dirname, '../data',  'equipos.db.json');
@@ -70,5 +85,6 @@ module.exports = {
   loadClubs,
   addClub,
   removeClub,
+  editClub,
   getClubInfo
 };

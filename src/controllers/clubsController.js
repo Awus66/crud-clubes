@@ -52,8 +52,8 @@ router.get('/clubs/create', async (req, res) => {
 });
 
 router.post('/clubs/create', upload.single('logo'), async (req, res) => {
+  const { name, tla, venue } = req.body;
   try {
-      const { name, tla, venue } = req.body;
       if (name.length > 60) {
         return res.status(400).send('Club name cannot exceed 60 characters');
       }
@@ -79,6 +79,51 @@ router.post('/clubs/create', upload.single('logo'), async (req, res) => {
   } catch (error) {
       res.status(500).send('Error adding new club.');
   }
+});
+
+router.get('/clubs/:id/edit', async (req, res) => {
+  try {
+    const clubID = parseInt(req.params.id);
+    const club = await clubsService.getClubInfo({id: clubID});
+    if (club) {
+      res.render('editClub', { club, title: 'Edit club'});
+    } else {
+      res.status(404).send('Club not found');
+    }
+  } catch (error) {
+    res.status(500).send('Error editing club')
+  }
+});
+
+router.post('/clubs/:id/edit', async (req, res) => {
+  const { name, tla, venue } = req.body;
+  try {
+    if (name.length > 60) {
+      return res.status(400).send('Club name cannot exceed 60 characters');
+    }
+
+    const tlaRegex = /^[A-Za-z]{3}$/;
+    if (!tlaRegex.test(tla)) {
+      return res.status(400).send('TLA must be exactly 3 alphabetical characters');
+    }
+
+
+    if (venue.length > 60) {
+      return res.status(400).send('Stadium name cannot exceed 60 characters');
+    }
+
+    const newInfo = {
+        id: req.params.id,
+        name: req.body.name,
+        tla: req.body.tla,
+        venue: req.body.venue,
+        crestUrl: `/uploads/${req.file.filename}`
+    };
+    await clubsService.editClub(newInfo);
+    res.redirect('/clubs');
+} catch (error) {
+    res.status(500).send(`Error editing ${name} club.`);
+}
 });
 
 router.get('/clubs/:id', async (req, res) => {
