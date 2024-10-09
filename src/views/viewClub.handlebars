@@ -1,0 +1,41 @@
+<h1 class="text-center tag">{{club.shortName}} Information</h1>
+<div class="container justify-content-center pb-3 mb-3 text-center">
+    <table class="clubs-table table-hover table-striped">
+        <tbody class="table-group-divider">
+            <tr>
+                <img src="{{club.crestUrl}}" class="img-fluid m-2   " alt="{{club.name}} Logo" style="width: auto;max-width:200px; height:auto;"/>
+            </tr>
+            <tr>
+                <th scope="col">ID</th>
+                <td>{{club.id}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Name</th>
+                <td>{{club.name}}</td>
+            </tr>
+            <tr>
+                <th scope="col">TLA</th>
+                <td>{{club.tla}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Stadium</th>
+                <td>{{club.venue}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Founded</th>
+                <td>{{club.founded}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Website</th>
+                <td>{{club.website}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Address</th>
+                <td>{{club.address}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="map" style="height: 350px; width: 100%;" data-address="{{club.venue}}"></div>
+</div>
+
+<script src="/js/main.js"></script>

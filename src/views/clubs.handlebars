@@ -1,5 +1,9 @@
-<h1 class="text-center">Club List</h1>
-<div class="container justify-content-center pb-3 mb-3 text-center">
+<h1>Premier League</h1>
+<div class="container justify-content-between d-flex align-items-center">
+  <h4>Club Count: {{clubCount}}</h4>
+  <a href="/clubs/create" class="btn btn-success mb-4">Add New Club</a>
+</div>
+<div class="container justify-content-center pb-3 mb-3 mt-3 text-center">
     <table class="clubs-table table-hover table-striped">
         <thead>
             <tr>
@@ -8,18 +12,28 @@
                 <th scope="col">Name</th>
                 <th scope="col">TLA</th>
                 <th scope="col">Stadium</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             {{#each clubs}}
                 <tr class="row-lg-auto mt-3 align-middle">
                     <th scope="row">{{id}}</th>
-                    <td><img src="{{crestUrl}}" class="img-fluid" alt="{{name}} Logo" style="width: 37px; height:auto;"/></td>
+                    <td><img src="{{crestUrl}}" class="img-fluid" alt="{{name}} Logo" style="width: 42px; height:42px;"/></td>
                     <td>{{name}}</td>
                     <td>{{tla}}</td>
                     <td>{{venue}}</td>
+                    <td>
+                        <a href="/clubs/{{id}}" class="btn btn-outline-light btn-sm">Show</a>
+                        <form action="/clubs/{{id}}/edit" method="get" style="display:inline;">
+                            <button type="submit" class="btn btn-outline-light btn-sm">Edit</button>
+                        </form>
+                        <button class="btn btn-outline-danger btn-sm delete-club-btn" club-id="{{id}}">Delete</button>
+                    </td>
                 </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
+
+<script src="/js/main.js"></script>

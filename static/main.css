@@ -5,8 +5,96 @@ body {
     background-attachment: fixed;
     background-position: center center;
     color: white;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="file"] {
+    width: 70%;
+    padding: 10px;
+    margin: 15px auto;
+    display: block;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: green;
+}
+
+input[type="file"] {
+    background-color: #fff;
+    color: #28a745;
+    border: 2px solid #28a745;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+input[type="file"]:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+label {
+    width: 25%;
+    text-align: center;
+    background-color: green;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+h1 {
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2rem;
+    background-color: green;
+    border-radius: 15px;
+    padding: 10px 0;
+}
+
+.form-custom {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 800px; 
+    margin: auto; 
+}
+
+
+.tag {
+    background-color: green;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 
@@ -46,7 +134,7 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: green;
     color: white;
 }
 
