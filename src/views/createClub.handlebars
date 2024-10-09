@@ -1,5 +1,5 @@
 <div class="container justify-content-center pb-3 mb-3 text-center">
-    <form action="/clubs/create" id="create-form" method="post" enctype="multipart/form-data">
+    <form class="form-custom" action="/clubs/create" id="create-form" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="name" class="form-label tag">Club Name</label>
             <input type="text" id="name" name="name" class="form-control" maxlength="60" required>
@@ -26,7 +26,7 @@
         </div>
         <div class="mb-3">
             <label for="email" class="form-label tag">Email</label>
-            <input type="text" id="email" name="email" class="form-control" maxlength="60" required>
+            <input type="email" id="email" name="email" class="form-control" maxlength="60" required>
         </div>
         <div class="mb-3">
             <label for="founded" class="form-label tag">Founded</label>
